@@ -28,7 +28,6 @@ app.use(parallel([
 ]));
 
 app.set('x-powered-by', false);
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -38,6 +37,8 @@ hbs.registerPartials(__dirname + '/views');
 hbs.registerPartials(__dirname + '/views/modules');
 
 app.use('/statics', express.static(path.join(__dirname, 'statics'), {maxAge: fullDay}));
+app.use('/src', express.static(path.join(__dirname, 'src'), {maxAge: fullDay}));
+app.use('/', express.static(path.join(__dirname, ''), {maxAge: fullDay}));
 
 app.use('/', routes);
 app.get('/health', function(req, res) {

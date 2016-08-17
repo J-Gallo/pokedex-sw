@@ -6,8 +6,8 @@ module.exports = (ROOT_PATH) => {
       port: 3000
     },
     services: {
-      restler_timeout: 5000,
-      standard_ttl: 300
+      restler_timeout: 15000,
+      standard_ttl: 1300
     },
   };
   return config;

@@ -11,8 +11,14 @@ module.exports = {
 
     pokemon: (req, res, next) => {
       var pokemonId = req.query.pokemonId;
-      res.render('pokemon.hbs', {
-        pokemonId: pokemonId
-      });
+
+      if (pokemonId < 152) {
+        // apiClient.getPokemonInfo(pokemonId).then((pokemonData) => {
+          // console.log(pokemonData);
+          res.render('pokemon.hbs', {
+            pokemonId: pokemonId
+          });
+        // });
+      }
     }
 };

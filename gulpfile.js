@@ -66,6 +66,6 @@ gulp.task('copyFonts', function() {
     });
 });
 
-gulp.task('build', ['delete', 'copyImages', 'copyFonts', 'sass', 'scripts']);
+gulp.task('build', ['delete', 'copyImages', 'copyFonts', 'sass']);
 
 gulp.task('default', ['build', 'sass:watch', 'scripts:watch', 'server']);
