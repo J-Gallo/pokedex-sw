@@ -6,6 +6,13 @@ var apiClient       = require("../services/api_client"),
 /* -----------------   Controllers   ----------------- */
 module.exports = {
     index: (req, res, next) => {
-      res.send('hola');
+      res.render('index.hbs');
+    },
+
+    pokemon: (req, res, next) => {
+      var pokemonId = req.query.pokemonId;
+      res.render('pokemon.hbs', {
+        pokemonId: pokemonId
+      });
     }
 };
