@@ -11,8 +11,6 @@ var async = require("async");
 var fs = require('fs');
 var config = require('./config/config');
 var device = require('get-user-agent');
-var loggerUtil = require('./utils/logger');
-var normandiaClient = require('./services/normandia_client');
 
 var app = express();
 var hbs = require('hbs');
@@ -21,7 +19,6 @@ var appv = fs.readFileSync('APP_VERSION').toString().trim();
 var fullDay = 86400000;
 
 app.use(parallel([
-  logger('dev'),
   bodyParser.json(),
   bodyParser.urlencoded({ extended: false }),
   cookieParser(),
@@ -51,25 +48,6 @@ app.get('/health', function(req, res) {
 app.use(function(err, req, res, next) {
   err.status = err.status || 500;
   if(err.status != 500) return next(err);
-
-  loggerUtil.error(err);
-  normandiaClient.getTemplate(res.locals.device).then(function(headerAndFooter) {
-    res.render('error', {
-      msg: 'Hubo un error.',
-      ex: err,
-      normandia_header: headerAndFooter.headerHtml,
-      normandia_footer: headerAndFooter.footerHtml,
-      normandiaJs: headerAndFooter.js,
-      normandiaCss: headerAndFooter.css,
-      normandia_endpoint: config.services.normandia.base_url
-    });
-  }).catch(function(){
-    // Error en normandia y sin cache.
-    res.render('error', {
-      msg: 'Hubo un error.',
-      ex: err + " || Error getting normandia templates"
-    });
-  });
 });
 
 
