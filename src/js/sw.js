@@ -41,32 +41,11 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  console.log('fetch');
+  var req = event.request;
 
-    /*if (event.request.mode === 'navigate' ||
-        (event.request.method === 'GET' &&
-            event.request.headers.get('accept').includes('text/html'))) {
+  if (req.mode === 'navigate' || (req.method == 'GET' && )) {
 
-        event.respondWith(
-            fetch(event.request).catch(function() {
-                return caches.match('/offline.html');
-            })
-        );
-    }*/
-
-    if (isValidUrl(event.request.url)) {
-        event.respondWith(
-            caches.open(versionCache).then(function(cache) {
-              console.log(cache);
-                return cache.match(event.request).then(function(response) {
-                    return response || fetch(event.request).then(function(response) {
-                        cache.put(event.request, response.clone());
-                        return response;
-                    });
-                });
-            })
-        );
-    }
+  }
 });
 
 function isValidUrl(url) {

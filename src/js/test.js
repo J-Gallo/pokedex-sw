@@ -1,5 +1,3 @@
-console.log('Test');
-
 if (!navigator.onLine) {
   console.log('Estas offline');
 }
